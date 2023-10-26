@@ -2,18 +2,22 @@ from fastapi import FastAPI
 import pandas as pd
 import ast
 
+
 app = FastAPI()
 
 
 df = pd.read_csv(r'data_set_limpio/games_preparado.csv.gz')
 
-opinion = pd.read_csv(r'data_set_limpio/reviews_preparado.csv.gz')
 
-item = pd.read_csv(r'data_set_limpio/items_preparado.csv.gz')
+#opinion = pd.read_csv(r'data_set_limpio/reviews_preparado.csv.gz')
+
+
+#item = pd.read_csv(r'data_set_limpio/items_preparado.csv.gz')
 
 
 @app.get('/items_usuario/{usuario}')
 def userdata(user: str):
+    
     
     precios = []
     respuesta = {}
@@ -48,6 +52,10 @@ def userdata(user: str):
 
 @app.get('/desarrollador/{developer}')
 def developer(developer : str):
+    
+    
+    if developer not in list(df['developer']):
+        return 'El desarrollador no se encuentra en la base de datos' 
     
     fecha_inicio = df.loc[df['developer'] == developer]['release_date'].min()[:4]
     fecha_final =  df.loc[df['developer'] == developer]['release_date'].max()
