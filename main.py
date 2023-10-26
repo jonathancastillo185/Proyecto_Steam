@@ -9,7 +9,7 @@ app = FastAPI()
 df = pd.read_csv(r'data_set_limpio/games_preparado.csv.gz')
 
 
-#opinion = pd.read_csv(r'data_set_limpio/reviews_preparado.csv.gz')
+opinion = pd.read_csv(r'data_set_limpio/reviews_preparado.csv.gz')
 
 
 #item = pd.read_csv(r'data_set_limpio/items_preparado.csv.gz')
