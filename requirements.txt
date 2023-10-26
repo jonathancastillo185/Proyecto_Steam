@@ -12,7 +12,5 @@ scikit-learn
 scipy
 seaborn
 tokenizers
-torch
-transformers
 uvicorn
 pip
