@@ -4,4 +4,4 @@ app = FastAPI()
 
 @app.get('/')
 def index():
-    return('lalalala trolo  2')
+    print(input('excribe un numero'))
