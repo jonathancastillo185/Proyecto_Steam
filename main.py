@@ -7,13 +7,47 @@ app = FastAPI()
 
 df = pd.read_csv(r'data_set_limpio/games_preparado.csv.gz')
 
+opinion = pd.read_csv(r'data_set_limpio/reviews_preparado.csv.gz')
+
 item = pd.read_csv(r'data_set_limpio/items_preparado.csv.gz')
 
-#opinion = pd.read_csv(r'data_set_limpio/reviews_preparado.csv.gz')
 
 
+@app.get('/items_usuario/{usuario}')
+def userdata(user: str):
+    
+    precios = []
+    respuesta = {}
+    
+    usuario = item.loc[item['user_id'] == user]['items']
+    if not usuario.empty:
+        usuario = usuario.iloc[0]
+    data = ast.literal_eval(usuario)
+    result = pd.DataFrame(data)
+    result.dropna(inplace=True)
 
-@app.get('/items/{developer}')
+    for y in result['item_name']:
+        price = df.loc[df['app_name'] == y]['price'].values
+        if len(price) > 0:
+            try: 
+                price_value = float(price[0])
+                precios.append(price_value)
+            except ValueError:
+                pass  
+    
+    respuesta['Usuario'] = user
+    respuesta['Dinero gastado'] = str(round(sum(precios)))+' USD'
+    respuesta["cantidad de items"] = str(item.loc[item['user_id'] == user]['items_count'].values[0])
+    
+    coment = len(opinion.loc[opinion['user'] == user])
+    
+    respuesta['Porcentaje de recomendaciones'] = str(round(((len(opinion.loc[opinion['user'] == user]) / item.loc[item['user_id'] == user]['items_count'].values[0])) * 100,2))+ '%'
+    
+    
+    return respuesta
+
+
+@app.get('/desarrollador/{developer}')
 def developer(developer : str):
     
     fecha_inicio = df.loc[df['developer'] == developer]['release_date'].min()[:4]
@@ -35,17 +69,3 @@ def developer(developer : str):
     
     return resultado
 
-
-
-
-
-
-@app.get('/items/{item_id}')
-def read_item(item_id: int, q: str = None):
-    return {'item_id' : item_id, 'q': q}
-
-
-
-@app.get('/items/{developer}')
-def mostrar(developer : str = NotImplemented):
-    return df
