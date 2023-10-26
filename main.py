@@ -12,7 +12,6 @@ opinion = pd.read_csv(r'data_set_limpio/reviews_preparado.csv.gz')
 item = pd.read_csv(r'data_set_limpio/items_preparado.csv.gz')
 
 
-
 @app.get('/items_usuario/{usuario}')
 def userdata(user: str):
     
