@@ -19,11 +19,11 @@ opinion = pd.read_csv(r'data_set_limpio/reviews_preparado.csv.gz')
 def userdata(user: str):
     
     try:
-        for x in pd.read_csv(r'data_set_limpio/items_preparado.csv.gz', chunksize=10000):
+        for x in pd.read_csv(r'data_set_limpio/items_preparado.csv.gz', chunksize=5000):
             if user in list(x['user_id']):
                 aux = x
                 break
-        
+            x = 0
                 
             
         
