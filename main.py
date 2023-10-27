@@ -18,36 +18,47 @@ opinion = pd.read_csv(r'data_set_limpio/reviews_preparado.csv.gz')
 @app.get('/items_usuario/{usuario}')
 def userdata(user: str):
     
-    
-    precios = []
-    respuesta = {}
-    
-    usuario = item.loc[item['user_id'] == user]['items']
-    if not usuario.empty:
-        usuario = usuario.iloc[0]
-    data = ast.literal_eval(usuario)
-    result = pd.DataFrame(data)
-    result.dropna(inplace=True)
+    try:
+        for x in pd.read_csv(r'data_set_limpio/items_preparado.csv.gz', chunksize=10000):
+            if user in list(x['user_id']):
+                aux = x
+                break
+        
+                
+            
+        
+        precios = []
+        respuesta = {}
+        
+        
+        usuario = aux.loc[aux['user_id'] == user]['items']
+        
+        
+        if not usuario.empty:
+            usuario = usuario.iloc[0]
+        data = ast.literal_eval(usuario)
+        result = pd.DataFrame(data)
+        result.dropna(inplace=True)
+        
 
-    for y in result['item_name']:
-        price = df.loc[df['app_name'] == y]['price'].values
-        if len(price) > 0:
-            try: 
-                price_value = float(price[0])
-                precios.append(price_value)
-            except ValueError:
-                pass  
-    
-    respuesta['Usuario'] = user
-    respuesta['Dinero gastado'] = str(round(sum(precios)))+' USD'
-    respuesta["cantidad de items"] = str(item.loc[item['user_id'] == user]['items_count'].values[0])
-    
-    coment = len(opinion.loc[opinion['user'] == user])
-    
-    respuesta['Porcentaje de recomendaciones'] = str(round(((len(opinion.loc[opinion['user'] == user]) / item.loc[item['user_id'] == user]['items_count'].values[0])) * 100,2))+ '%'
-    
-    
-    return respuesta
+        for y in result['item_name']:
+            price = df.loc[df['app_name'] == y]['price'].values
+            if len(price) > 0:
+                try: 
+                    price_value = float(price[0])
+                    precios.append(price_value)
+                except ValueError:
+                    pass  
+                
+        respuesta['Usuario'] = user
+        respuesta['Dinero gastado'] = str(round(sum(precios)))+' USD'
+        respuesta["cantidad de items"] = str(len(result))
+        
+        respuesta['Porcentaje de recomendaciones'] = str(round(((len(opinion.loc[opinion['user'] == user]) / len(result))) * 100,2))+ '%'
+        
+        return respuesta
+    except:
+        return 'El usuario no se encuentra en la base de datos.'
 
 
 @app.get('/desarrollador/{developer}')
