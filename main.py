@@ -120,7 +120,7 @@ def best_developer_year(year : str):
 @app.get('/Recomendaciones/{des}')
 def resenias_developer( des : str ):
     try:
-        dev = pd.read_parquet('data_set_limpio/recomends_dev.parquet')
+        dev = pd.read_parquet(r'data_set_limpio/recomends_dev.parquet')
         
         developer = dev.loc[dev['Developers'] == des]
         
