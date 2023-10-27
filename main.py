@@ -26,7 +26,7 @@ def userdata(user: str):
             x = 0
                 
             
-        
+
         precios = []
         respuesta = {}
         
@@ -38,8 +38,9 @@ def userdata(user: str):
             usuario = usuario.iloc[0]
         data = ast.literal_eval(usuario)
         result = pd.DataFrame(data)
-        result.dropna(inplace=True)
-        
+        #result.dropna(inplace=True)
+        #result.drop(columns='playtime_2weeks',inplace=True)
+
 
         for y in result['item_name']:
             price = df.loc[df['app_name'] == y]['price'].values
@@ -49,7 +50,7 @@ def userdata(user: str):
                     precios.append(price_value)
                 except ValueError:
                     pass  
-                
+        
         respuesta['Usuario'] = user
         respuesta['Dinero gastado'] = str(round(sum(precios)))+' USD'
         respuesta["cantidad de items"] = str(len(result))
