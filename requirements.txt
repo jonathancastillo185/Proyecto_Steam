@@ -2,7 +2,6 @@ fastapi
 joblib
 jupyter_client
 jupyter_core
-keras
 matplotlib
 matplotlib-inline
 numpy

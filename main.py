@@ -91,7 +91,7 @@ def best_developer_year(year : str):
     
     year = int(year)
     
-    anio = pd.read_csv(r'data_set_limpio\Max_developer_year.csv')
+    anio = pd.read_csv(r'data_set_limpio/Max_developer_year.csv')
     
     anio = anio.sort_values('Anio', ascending=False)
     
