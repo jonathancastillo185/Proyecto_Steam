@@ -89,25 +89,28 @@ def developer(developer : str):
 @app.get('/Top_3/{year}')
 def best_developer_year(year : str):
     
-    year = int(year)
-    
-    anio = pd.read_csv(r'data_set_limpio/Max_developer_year.csv')
-    
-    anio = anio.sort_values('Anio', ascending=False)
-    
-    seleccion = anio.loc[anio['Anio'] == year].copy()
-    
-    seleccion.fillna('No existen resenias',inplace=True)
-    
-    
-    
-    if not seleccion['Anio'].empty:
-        respuesta = {'Anio': str(seleccion['Anio'].values[0]),
-                     'Top 1': str(seleccion['Top 1'].values[0]),
-                     'Top 2': str(seleccion['Top 2'].values[0]),
-                     'Top 3': str(seleccion['Top 3'].values[0])
-                     }
-    else:
-        return {'NO':''}
+    if isinstance(year, str):
+        return {'Solo se admiten valores numericos'}
+    elif isinstance(variable, int):
+        year = int(year)
+        
+        anio = pd.read_csv(r'data_set_limpio/Max_developer_year.csv')
+        
+        anio = anio.sort_values('Anio', ascending=False)
+        
+        seleccion = anio.loc[anio['Anio'] == year].copy()
+        
+        seleccion.fillna('No existen resenias',inplace=True)
+        
+        
+        
+        if not seleccion['Anio'].empty:
+            respuesta = {'Anio': str(seleccion['Anio'].values[0]),
+                        'Top 1': str(seleccion['Top 1'].values[0]),
+                        'Top 2': str(seleccion['Top 2'].values[0]),
+                        'Top 3': str(seleccion['Top 3'].values[0])
+                        }
+        else:
+            respuesta = {f'No ingreso un valor relevante, este es el rango disponible ({str(anio["Anio"].min())} - {str(anio["Anio"].max())})'}
 
-    return respuesta
+        return respuesta
