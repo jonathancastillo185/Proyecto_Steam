@@ -108,7 +108,6 @@ def best_developer_year(year : str):
                      'Top 3': str(seleccion['Top 3'].values[0])
                      }
     else:
-        # Manejar el caso en el que la serie esté vacía
-        respuesta = {f'No ingreso un valor relevante, este es el rango disponible ({str(anio["Anio"].min())} - {str(anio["Anio"].max())})'}
+        return {'NO':''}
 
     return respuesta
