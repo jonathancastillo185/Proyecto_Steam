@@ -86,10 +86,12 @@ def developer(developer : str):
 
 
 
-@app.get('/Top_3_Year/{year}')
-def best_developer_year(year : int):
+@app.get('/Top_3/{year}')
+def best_developer_year(year : str):
     
-    anio = pd.read_csv('data_set_limpio\Max_developer_year.csv')
+    year = int(year)
+    
+    anio = pd.read_csv(r'data_set_limpio\Max_developer_year.csv')
     
     anio = anio.sort_values('Anio', ascending=False)
     
@@ -97,10 +99,16 @@ def best_developer_year(year : int):
     
     seleccion.fillna('No existen resenias',inplace=True)
     
-    respuesta = {}
     
-    respuesta['Anio'] = seleccion['Anio'].values[0]
-    respuesta['Top 1'] = seleccion['Top 1'].values[0]
-    respuesta['Top 2'] = seleccion['Top 2'].values[0]
-    respuesta['Top 3'] = seleccion['Top 3'].values[0]
+    
+    if not seleccion['Anio'].empty:
+        respuesta = {'Anio': str(seleccion['Anio'].values[0]),
+                     'Top 1': str(seleccion['Top 1'].values[0]),
+                     'Top 2': str(seleccion['Top 2'].values[0]),
+                     'Top 3': str(seleccion['Top 3'].values[0])
+                     }
+    else:
+        # Manejar el caso en el que la serie esté vacía
+        respuesta = {f'No ingreso un valor relevante, este es el rango disponible ({str(anio["Anio"].min())} - {str(anio["Anio"].max())})'}
+
     return respuesta
