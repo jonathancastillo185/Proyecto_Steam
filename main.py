@@ -8,12 +8,7 @@ app = FastAPI()
 
 df = pd.read_csv(r'data_set_limpio/games_preparado.csv.gz')
 
-
 opinion = pd.read_csv(r'data_set_limpio/reviews_preparado.csv.gz')
-
-
-#item = pd.read_csv(r'data_set_limpio/items_preparado.csv.gz')
-
 
 @app.get('/items_usuario/{usuario}')
 def userdata(user: str):
@@ -62,6 +57,7 @@ def userdata(user: str):
         return 'El usuario no se encuentra en la base de datos.'
 
 
+
 @app.get('/desarrollador/{developer}')
 def developer(developer : str):
     
@@ -87,6 +83,7 @@ def developer(developer : str):
     resultado = {'Cantidad de Items': anio,'Contenido Free':free}
     
     return resultado
+
 
 
 @app.get('/Top_3_Year/{year}')

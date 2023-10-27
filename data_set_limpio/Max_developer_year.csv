@@ -1,30 +1,30 @@
-,Anio,Top 1,Top 2,Top 3
-0,2009,"('Valve', 175)","('Tripwire Interactive', 74)","('Invent4 Entertainment', 14)"
-1,2013,"('Facepunch Studios', 117)","('Digital Extremes', 115)","('Bohemia Interactive', 107)"
-2,2015,"('Psyonix, Inc.', 60)","('Rockstar North', 44)","('Splash Damage', 27)"
-3,2014,"('Edge of Reality', 85)","('Coffee Stain Studios', 48)","('The Behemoth', 27)"
-4,2011,"('Re-Logic', 185)","('Valve', 71)","('No More Room in Hell Team', 55)"
-5,2016,"('Chucklefish', 45)","('Reto-Moto', 30)","('Tripwire Interactive', 18)"
-6,2012,"('Valve', 955)","('Gearbox Software,Aspyr (Mac &amp; Linux)', 136)","('Daybreak Game Company', 79)"
-7,2004,"('Valve', 100)","('The Creative Assembly', 5)","('Gray Matter Studios', 2)"
-8,2007,"('Valve', 1095)","('2K Boston,2K Australia', 8)","('Zombie Panic Team', 8)"
-9,2017,"('Smartly Dressed Games', 189)","('Freejam', 57)","('Studio Wildcard,Instinct Games,Efecto Studios,Virtual Basement LLC', 32)"
-10,2006,"('Facepunch Studios', 392)","('Nabi Studios', 15)","('Relic Entertainment', 10)"
-11,2010,"('Firaxis Games,Aspyr (Mac, Linux)', 63)","('TaleWorlds Entertainment', 43)","('Obsidian Entertainment', 38)"
-12,2002,"('Bethesda Game Studios', 2)","('Rockstar Games', 1)","('Running With Scissors', 1)"
-13,1995,"('LucasArts', 1)","('Raven Software,Aspyr (Mac)', 1)","('Rockstar Games', 5)"
-14,2003,"('BioWare,Aspyr (Mac)', 2)","('Synergy Team', 9)","('Oddworld Inhabitants', 1)"
-15,2005,"('Pandemic Studios', 11)","('Black Isle Studios', 1)","('Dylan Fitterer', 6)"
-16,1998,"('Valve', 10)","('Valve', 7)","('Irrational Games,Looking Glass Studios', 1)"
-17,2008,"('Treyarch', 12)","('Sven Co-op Team', 3)","('Cavedog Entertainment', 1)"
-18,1990,"('id Software', 1)","('Red Storm Entertainment', 1)",
-19,1992,"('Redwood Games', 1)","('Running With Scissors', 1)",
-20,1993,"('MicroProse Software, Inc', 1)",,
-21,1999,"('Valve', 3)",,
-22,2000,"('Valve', 13)",,
-23,2001,"('Gearbox Software', 1)",,
-24,1997,"('Oddworld Inhabitants', 3)",,
-25,1996,,,
-26,1994,,,
-27,1989,,,
-28,1991,,,
+Anio,Top 1,Top 2,Top 3
+2009,"('Valve', 426)","('Tripwire Interactive', 178)","('Infinity Ward,Aspyr (Mac)', 47)"
+2013,"('Bohemia Interactive', 516)","('Facepunch Studios', 441)","('Digital Extremes', 383)"
+2015,"('Psyonix, Inc.', 176)","('Rockstar North', 154)","('tobyfox', 147)"
+2014,"('Edge of Reality', 198)","('Coffee Stain Studios', 152)","('New World Interactive', 132)"
+2011,"('Re-Logic', 515)","('Valve', 252)","('No More Room in Hell Team', 146)"
+2016,"('Chucklefish', 251)","('Reto-Moto', 119)","('Klei Entertainment', 75)"
+2012,"('Valve', 2095)","('Gearbox Software,Aspyr (Mac &amp; Linux)', 389)","('Daybreak Game Company', 235)"
+2004,"('Valve', 293)","('The Creative Assembly', 10)","('Troika Games', 4)"
+2007,"('Valve', 2442)","('2K Boston,2K Australia', 49)","('Zombie Panic Team', 18)"
+2017,"('Smartly Dressed Games', 594)","('Freejam', 178)","('Studio Wildcard,Instinct Games,Efecto Studios,Virtual Basement LLC', 160)"
+2006,"('Facepunch Studios', 1104)","('Nabi Studios', 47)","('Relic Entertainment', 33)"
+2010,"('Firaxis Games,Aspyr (Mac, Linux)', 238)","('TaleWorlds Entertainment', 136)","('Obsidian Entertainment', 130)"
+2002,"('Bethesda Game Studios', 14)","('Rockstar Games', 6)","('FireFly Studios', 3)"
+1995,"('LucasArts', 5)","('id Software', 4)","('Wisdom Tree, Inc.', 1)"
+2003,"('Running With Scissors', 37)","('BioWare,Aspyr (Mac)', 15)","('Rockstar Games', 10)"
+2005,"('Pandemic Studios', 58)","('Synergy Team', 19)","('Rockstar Games', 19)"
+1998,"('Valve', 40)","('Oddworld Inhabitants', 5)","('Black Isle Studios', 4)"
+2008,"('Treyarch', 39)","('Dylan Fitterer', 29)","('Maxis™', 25)"
+1990,"('id Software', 3)","('LucasArts', 1)","('Gremlin Interactive', 1)"
+1992,"('3D Realms (Apogee Software)', 1)","('Redwood Games', 1)","('Irrational Games,Looking Glass Studios', 4)"
+1993,"('Humongous Entertainment', 1)","('MicroProse Software, Inc', 1)","('Rebellion', 5)"
+1999,"('Sven Co-op Team', 11)","('Valve', 6)","('Volition, Inc.', 2)"
+2000,"('Valve', 37)","('Ion Storm', 8)","('Cavedog Entertainment', 3)"
+2001,"('Gearbox Software', 3)","('Firaxis Games', 3)","('Gremlin Interactive', 1)"
+1997,"('Oddworld Inhabitants', 15)","('Interplay Inc.', 4)","('Humongous Entertainment', 1)"
+1996,"('Cyberdreams', 1)","('Rogue Entertainment', 1)",
+1994,"('id Software', 5)","('Lucasfim', 1)",
+1989,"('MicroProse Software, Inc', 1)",,
+1991,"('3D Realms (Apogee Software)', 1)",,
