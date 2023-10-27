@@ -114,3 +114,20 @@ def best_developer_year(year : str):
             respuesta = {f'No ingreso un valor relevante, este es el rango disponible ({str(anio["Anio"].min())} - {str(anio["Anio"].max())})'}
 
         return respuesta
+
+
+
+@app.get('/Recomendaciones/{des}')
+def resenias_developer( des : str ):
+    try:
+        dev = pd.read_parquet('data_set_limpio/recomends_dev.parquet')
+        
+        developer = dev.loc[dev['Developers'] == des]
+        
+        respuesta = {'Deloper' : str(developer['Developers'].values[0]), 'Reviews positivos' : str(developer['Positivo'].values[0]),'Reviews negativos' : str(developer['Negativo'].values[0])}
+
+        return respuesta
+    
+    except:
+        
+        return 'No ingreso un valor relevante, o el desarrollador no se encuentra en la base de datos'
