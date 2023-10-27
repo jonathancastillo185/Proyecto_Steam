@@ -125,7 +125,7 @@ def resenias_developer( des : str ):
         developer = dev.loc[dev['Developers'] == des]
         
         respuesta = {'Deloper' : str(developer['Developers'].values[0]), 'Reviews positivos' : str(developer['Positivo'].values[0]),'Reviews negativos' : str(developer['Negativo'].values[0])}
-
+        dev = 0
         return respuesta
     
     except:
