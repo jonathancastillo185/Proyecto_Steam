@@ -88,3 +88,21 @@ def developer(developer : str):
     
     return resultado
 
+
+@app.get('/desarrollador/{Anio}')
+def best_developer_year(Anio : int):
+    anio = pd.read_csv('data_set_limpio\Max_developer_year.csv')
+    anio = anio.sort_values('Anio', ascending=False).reset_index(drop=True)
+
+    seleccion = anio[anio['Anio'] == year].fillna('No existen resenias').copy()
+
+    respuesta = {'Anio': year}
+
+    for i in range(1, 4):
+        value = seleccion[f'Top {i}'].values[0]
+        
+        clean_value = value.strip("()")
+        dev, reviews = clean_value.split(',') if ',' in clean_value else clean_value.split()
+        respuesta[f'Top {i}'] = f"{dev.strip()} : {reviews.strip()} Reviews Positivas"
+
+    return respuesta
