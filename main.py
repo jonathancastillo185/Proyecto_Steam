@@ -89,7 +89,7 @@ def developer(developer : str):
     return resultado
 
 
-@app.get('/desarrollador/{Anio}')
+@app.get('/Top_3_Year/{Anio}')
 def best_developer_year(Anio : int):
     anio = pd.read_csv('data_set_limpio\Max_developer_year.csv')
     anio = anio.sort_values('Anio', ascending=False).reset_index(drop=True)
