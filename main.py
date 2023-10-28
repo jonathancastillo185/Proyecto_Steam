@@ -87,13 +87,8 @@ def developer(developer : str):
 
 
 @app.get('/Top_3/{year}')
-def best_developer_year(year : str):
+def best_developer_year(year : int):
     
-    if isinstance(year, str):
-        return {'Solo se admiten valores numericos'}
-    elif isinstance(variable, int):
-        year = int(year)
-        
         anio = pd.read_csv(r'data_set_limpio/Max_developer_year.csv')
         
         anio = anio.sort_values('Anio', ascending=False)
