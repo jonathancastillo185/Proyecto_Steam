@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 import pandas as pd
 import ast
-
+import pyarrow.parquet as pq
 
 app = FastAPI()
 
@@ -83,7 +83,7 @@ def developer(developer : str):
     resultado = {'Cantidad de Items': anio,'Contenido Free':free}
     
     return resultado
-    
+
 
 
 @app.get('/Top_3/{year}')
@@ -115,8 +115,12 @@ def best_developer_year(year : int):
 
 @app.get('/Recomendaciones/{des}')
 def resenias_developer( des : str ):
+    
     try:
-        dev = pd.read_parquet(r'data_set_limpio/recomends_dev.parquet')
+
+        table = pq.read_table('data_set_limpio/recomends_dev.parquet')
+        
+        dev = table.to_pandas()
         
         developer = dev.loc[dev['Developers'] == des]
         
@@ -126,4 +130,4 @@ def resenias_developer( des : str ):
     
     except:
         
-        return 'No ingreso un valor relevante, o el desarrollador no se encuentra en la base de datos'
+        return 'No ingreso un valor relevante, o el desarrollador no se encuentra en la base de datos'   
