@@ -83,14 +83,15 @@ def developer(developer : str):
     resultado = {'Cantidad de Items': anio,'Contenido Free':free}
     
     return resultado
-
+    
 
 
 @app.get('/Top_3/{year}')
 def best_developer_year(year : int):
     
-        anio = pd.read_csv(r'data_set_limpio/Max_developer_year.csv')
-        
+        anio = pd.read_csv('data_set_limpio//Max_developer_year.csv')
+
+            
         anio = anio.sort_values('Anio', ascending=False)
         
         seleccion = anio.loc[anio['Anio'] == year].copy()
