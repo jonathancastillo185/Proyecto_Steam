@@ -148,6 +148,7 @@ def recomendaciones_usuario(usuario : str):
         return {'El usuario no existe en la base de datos'}
     else:
         diccionario = {}
+        
         juegos_valorados = entrenar[entrenar['user'] == usuario]['app_name'].unique()
 
         todos_los_juegos = entrenar['app_name'].unique()
@@ -157,10 +158,8 @@ def recomendaciones_usuario(usuario : str):
         predicciones = [model.predict(usuario, juego) for juego in juegos_no_valorados]
         
         recomendaciones = sorted(predicciones, key=lambda x: x.est, reverse=True)[:5] 
-
+        cont = 1
         for recomendacion in recomendaciones:
-            
-            diccionario[recomendacion.iid] = recomendacion.est
-            
+            diccionario[f'Recomendacion - {cont}'] = recomendacion.iid
+            cont+=1
         return diccionario
-
