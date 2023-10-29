@@ -141,6 +141,8 @@ def resenias_developer( des : str ):
         return 'No ingreso un valor relevante, o el desarrollador no se encuentra en la base de datos'   
     
 
+diccionario = {}
+
 @app.get('/Recomendaciones/{usuario}')
 def recomendaciones_usuario(usuario : str):
         
@@ -154,10 +156,12 @@ def recomendaciones_usuario(usuario : str):
     
     recomendaciones = sorted(predicciones, key=lambda x: x.est, reverse=True)[:5] 
 
-    diccionario = {}
+
     
     for recomendacion in recomendaciones:
         
         diccionario[recomendacion.iid] = recomendacion.est
         
     return diccionario
+
+diccionario = {}
