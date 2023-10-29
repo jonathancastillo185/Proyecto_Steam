@@ -28,8 +28,6 @@ def userdata(user: str):
                 break
             x = 0
                 
-            
-
         precios = []
         respuesta = {}
         
@@ -141,11 +139,11 @@ def resenias_developer( des : str ):
         return 'No ingreso un valor relevante, o el desarrollador no se encuentra en la base de datos'   
     
 
-diccionario = {}
+
 
 @app.get('/Recomendaciones/{usuario}')
 def recomendaciones_usuario(usuario : str):
-        
+    diccionario = {}
     juegos_valorados = entrenar[entrenar['user'] == usuario]['app_name'].unique()
 
     todos_los_juegos = entrenar['app_name'].unique()
@@ -162,4 +160,3 @@ def recomendaciones_usuario(usuario : str):
         
     return diccionario
 
-diccionario = {}
