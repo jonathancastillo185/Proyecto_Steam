@@ -143,20 +143,24 @@ def resenias_developer( des : str ):
 
 @app.get('/Recomendaciones/{usuario}')
 def recomendaciones_usuario(usuario : str):
-    diccionario = {}
-    juegos_valorados = entrenar[entrenar['user'] == usuario]['app_name'].unique()
-
-    todos_los_juegos = entrenar['app_name'].unique()
-
-    juegos_no_valorados = list(set(todos_los_juegos) - set(juegos_valorados))
-
-    predicciones = [model.predict(usuario, juego) for juego in juegos_no_valorados]
     
-    recomendaciones = sorted(predicciones, key=lambda x: x.est, reverse=True)[:5] 
+    if usuario not in entrenar['user'].unique():
+        return {'El usuario no existe en la base de datos'}
+    else:
+        diccionario = {}
+        juegos_valorados = entrenar[entrenar['user'] == usuario]['app_name'].unique()
 
-    for recomendacion in recomendaciones:
+        todos_los_juegos = entrenar['app_name'].unique()
+
+        juegos_no_valorados = list(set(todos_los_juegos) - set(juegos_valorados))
+
+        predicciones = [model.predict(usuario, juego) for juego in juegos_no_valorados]
         
-        diccionario[recomendacion.iid] = recomendacion.est
-        
-    return diccionario
+        recomendaciones = sorted(predicciones, key=lambda x: x.est, reverse=True)[:5] 
+
+        for recomendacion in recomendaciones:
+            
+            diccionario[recomendacion.iid] = recomendacion.est
+            
+        return diccionario
 
