@@ -2,13 +2,21 @@ from fastapi import FastAPI
 import pandas as pd
 import ast
 import pyarrow.parquet as pq
+import pickle
+
+
 
 app = FastAPI()
 
 
+with open('modelo_entrenado.pkl', 'rb') as file:
+    model = pickle.load(file)
+
 df = pd.read_csv(r'data_set_limpio/games_preparado.csv.gz')
 
 opinion = pd.read_csv(r'data_set_limpio/reviews_preparado.csv.gz')
+
+entrenar = pd.read_csv(r'data_set_limpio/modelo.csv.gz')
 
 @app.get('/items_usuario/{usuario}')
 def userdata(user: str):
@@ -113,7 +121,7 @@ def best_developer_year(year : int):
 
 
 
-@app.get('/Recomendaciones/{des}')
+@app.get('/Opiniones/{des}')
 def resenias_developer( des : str ):
     
     try:
@@ -131,3 +139,25 @@ def resenias_developer( des : str ):
     except:
         
         return 'No ingreso un valor relevante, o el desarrollador no se encuentra en la base de datos'   
+    
+
+@app.get('/Recomendaciones/{usuario}')
+def recomendaciones_usuario(usuario : str):
+        
+    juegos_valorados = entrenar[entrenar['user'] == usuario]['app_name'].unique()
+
+    todos_los_juegos = entrenar['app_name'].unique()
+
+    juegos_no_valorados = list(set(todos_los_juegos) - set(juegos_valorados))
+
+    predicciones = [model.predict(usuario, juego) for juego in juegos_no_valorados]
+    
+    recomendaciones = sorted(predicciones, key=lambda x: x.est, reverse=True)[:5] 
+
+    diccionario = {}
+    
+    for recomendacion in recomendaciones:
+        
+        diccionario[recomendacion.iid] = recomendacion.est
+        
+    return diccionario
