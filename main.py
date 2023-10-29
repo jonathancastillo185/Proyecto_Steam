@@ -156,8 +156,6 @@ def recomendaciones_usuario(usuario : str):
     
     recomendaciones = sorted(predicciones, key=lambda x: x.est, reverse=True)[:5] 
 
-
-    
     for recomendacion in recomendaciones:
         
         diccionario[recomendacion.iid] = recomendacion.est
