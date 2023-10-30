@@ -14,14 +14,14 @@ with open('modelo_entrenado.pkl', 'rb') as file:
 df = pd.read_csv(r'data_set_limpio/games_preparado.csv.gz')
 opinion = pd.read_csv(r'data_set_limpio/reviews_preparado.csv.gz')
 entrenar = pd.read_csv(r'data_set_limpio/modelo.csv.gz')
-item_user = pd.read_csv(r'data_set_limpio\item_cantidad_usuarios.csv.gz')
+item_user = pd.read_csv(r'data_set_limpio/item_cantidad_usuarios.csv.gz')
 
 
 @app.get('/items_usuario/{usuario}')
 def userdata(user: str):
     try:
         usuario = 0
-        chunks = pd.read_csv(r'data_set_limpio\item_desplegado.csv.gz', chunksize=200000)
+        chunks = pd.read_csv(r'data_set_limpio/item_desplegado.csv.gz', chunksize=200000)
         for chunk in chunks:
             if chunk['user'].isin([user]).any():
                 usuario = chunk[chunk['user'] == user]
@@ -115,7 +115,6 @@ def resenias_developer( des : str ):
         
         return 'No ingreso un valor relevante, o el desarrollador no tiene Resenias'   
     
-
 
 
 @app.get('/Recomendaciones/{usuario}')
