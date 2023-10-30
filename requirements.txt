@@ -13,3 +13,4 @@ seaborn
 tokenizers
 uvicorn
 pip
+surprise
