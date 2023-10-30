@@ -13,10 +13,10 @@ with open('modelo_entrenado.pkl', 'rb') as file:
     model = pickle.load(file)
 
 df = pd.read_csv(r'data_set_limpio/games_preparado.csv.gz')
-
 opinion = pd.read_csv(r'data_set_limpio/reviews_preparado.csv.gz')
-
 entrenar = pd.read_csv(r'data_set_limpio/modelo.csv.gz')
+
+
 
 @app.get('/items_usuario/{usuario}')
 def userdata(user: str):
@@ -39,8 +39,6 @@ def userdata(user: str):
             usuario = usuario.iloc[0]
         data = ast.literal_eval(usuario)
         result = pd.DataFrame(data)
-        #result.dropna(inplace=True)
-        #result.drop(columns='playtime_2weeks',inplace=True)
 
 
         for y in result['item_name']:
@@ -66,26 +64,22 @@ def userdata(user: str):
 
 @app.get('/desarrollador/{developer}')
 def developer(developer : str):
-    
-    
     if developer not in list(df['developer']):
-        return 'El desarrollador no se encuentra en la base de datos' 
+        return 'El desarrollador no se encuentra en la base de datos'
     
-    fecha_inicio = df.loc[df['developer'] == developer]['release_date'].min()[:4]
-    fecha_final =  df.loc[df['developer'] == developer]['release_date'].max()
+
+    fechas = df['release_date'].unique()
     
     anio = {}
-    free = {}
     
-    while fecha_inicio <= fecha_final:
-        if len(df[(df['release_date'] >= fecha_inicio) & (df['release_date'] <= fecha_inicio[:4]+'-12-31') & (df['developer'] == developer)]) > 0:
-            anio[fecha_inicio[:4]] = len(df[(df['release_date'] >= fecha_inicio) & (df['release_date'] <= fecha_inicio[:4]+'-12-31') & (df['developer'] == developer)])
-            free[fecha_inicio[:4]] = len(df[(df['release_date'] >= fecha_inicio) & (df['release_date'] <= fecha_inicio[:4]+'-12-31') & (df['developer'] == developer) & ((df['price'] == 'Free') | (df['price'] == 'Free to Play') )])
-        fecha_inicio = str(int(fecha_inicio[:4])+1)+'-01-01'
-
+    free = {}
+    for x in fechas:
+        if len(df[(df['release_date'] == x) & (df['developer'] == developer)]) != 0:
+            anio[x] = len(df[(df['release_date'] == x) & (df['developer'] == developer)])
+            free[x] = len(df[(df['release_date'] == x) & (df['developer'] == developer) & (df['price'] == 0.0)])
     for x,y  in free.items():
         free[x] = str(round((y / anio[x])*100,2))+'%'
-        
+
     resultado = {'Cantidad de Items': anio,'Contenido Free':free}
     
     return resultado
@@ -136,7 +130,7 @@ def resenias_developer( des : str ):
     
     except:
         
-        return 'No ingreso un valor relevante, o el desarrollador no se encuentra en la base de datos'   
+        return 'No ingreso un valor relevante, o el desarrollador no tiene Resenias'   
     
 
 
@@ -145,7 +139,7 @@ def resenias_developer( des : str ):
 def recomendaciones_usuario(usuario : str):
     
     if usuario not in entrenar['user'].unique():
-        return {'El usuario no existe en la base de datos'}
+        return {'El usuario no se encuentra en la base de datos'}
     else:
         diccionario = {}
         
@@ -163,3 +157,4 @@ def recomendaciones_usuario(usuario : str):
             diccionario[f'Recomendacion - {cont}'] = recomendacion.iid
             cont+=1
         return diccionario
+    
