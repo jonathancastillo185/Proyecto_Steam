@@ -122,7 +122,7 @@ def review_developer( des : str ):
 def recomend_user(usuario: str):
     if usuario not in entrenar['user'].unique():
         juegos_aleatorios = list(entrenar['app_name'].sample(5))
-        mensaje = f'El usuario "{usuario}" no posee ningún item en su biblioteca, por lo que la recomendación será aleatoria.'
+        mensaje = f'El usuario {usuario} no posee ningún item en su biblioteca, por lo que la recomendación será aleatoria.'
         return {mensaje: juegos_aleatorios}
     else:
         diccionario = {}
