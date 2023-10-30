@@ -1,0 +1,16 @@
+fastapi
+joblib
+jupyter_client
+jupyter_core
+matplotlib
+matplotlib-inline
+numpy
+pandas
+pyarrow
+scikit-learn
+scipy
+seaborn
+tokenizers
+uvicorn
+pip
+surprise
