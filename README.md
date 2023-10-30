@@ -33,20 +33,16 @@ La API proporciona las siguientes funciones:
 
 - `review_developer(desarrollador)` - Cantidad de registros de reseñas de usuarios categorizados con análisis de sentimiento positivo o negativo según el desarrollador.
 
-## Funcionalidad Principales de la API con modelo de Machine Learning
+## Funcionalidad de la API con modelo de Machine Learning
 
 - `recomend_user(usuario)` - 5 Recomendaciones para un usuario especifico, el modelo de machine learning entrenado con las bases de datos brindadas por la empresa le recomienda al usuario 5 juegos relacionados a su agrado en base a los juegos en los que dio su opinion, si el usuario no se encuentra en la base de datos o no dio valoraciones a ningun juego se le realizara una recomendacion aleatoria de juegos.
 
-## Uso del Repositorio
-
-### Instalación
-
-Para ejecutar el proyecto localmente, sigue estos pasos:
-
-1. Clona este repositorio.
-2. Instala las dependencias ejecutando: `pip install -r requirements.txt`.
-3. Ejecuta la aplicación con: `uvicorn main:app --reload`.
 
 ### Uso de la API
 
-Accede a la API desplegada en [enlace a la API].
+Accede a la API desplegada en [https://proyecto-steam-jac.onrender.com/].
+
+Accede al entorno virtual de la API en [https://proyecto-steam-jac.onrender.com/docs].
+
+
+### Uso de la API
