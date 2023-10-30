@@ -20,11 +20,8 @@ item_user = pd.read_csv(r'data_set_limpio/item_cantidad_usuarios.csv.gz')
 @app.get('/userdata/{usuario}')
 def userdata(user: str):
     try:
-<<<<<<< HEAD
         if user not in item_user['user_id'].unique():
             return {f'El usuario {user}, no existe.'}
-=======
->>>>>>> 782197baa4e1392360939c3d4b14270577a3c08a
         usuario = 0
         chunks = pd.read_csv(r'data_set_limpio/item_desplegado.csv.gz', chunksize=200000)
         for chunk in chunks:
