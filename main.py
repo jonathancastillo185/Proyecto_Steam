@@ -20,8 +20,6 @@ item_user = pd.read_csv(r'data_set_limpio/item_cantidad_usuarios.csv.gz')
 @app.get('/userdata/{usuario}')
 def userdata(user: str):
     try:
-        if user not in item_user['user_id'].unique():
-            return f'El usuario {user}, no existe.'
         usuario = 0
         chunks = pd.read_csv(r'data_set_limpio/item_desplegado.csv.gz', chunksize=200000)
         for chunk in chunks:
@@ -44,7 +42,7 @@ def userdata(user: str):
 @app.get('/desarrollador/{developer}')
 def developer(developer: str):
     if developer not in list(df['developer']):
-        return 'El desarrollador no se encuentra en la base de datos'
+        return {'El desarrollador no se encuentra en la base de datos'}
 
     fechas = df['release_date'].unique()
 
