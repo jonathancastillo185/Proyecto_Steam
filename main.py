@@ -89,16 +89,14 @@ def developer(developer : str):
 @app.get('/Top_3/{year}')
 def best_developer_year(year : int):
     
-        anio = pd.read_csv('data_set_limpio//Max_developer_year.csv')
+        anio = pd.read_csv(r'data_set_limpio//Max_developer_year.csv')
 
             
         anio = anio.sort_values('Anio', ascending=False)
         
         seleccion = anio.loc[anio['Anio'] == year].copy()
         
-        seleccion.fillna('No existen resenias',inplace=True)
-        
-        
+        seleccion.fillna('Sin informacion',inplace=True)
         
         if not seleccion['Anio'].empty:
             respuesta = {'Anio': str(seleccion['Anio'].values[0]),
