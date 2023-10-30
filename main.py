@@ -8,55 +8,32 @@ import json
 
 app = FastAPI()
 
-
 with open('modelo_entrenado.pkl', 'rb') as file:
     model = pickle.load(file)
 
 df = pd.read_csv(r'data_set_limpio/games_preparado.csv.gz')
 opinion = pd.read_csv(r'data_set_limpio/reviews_preparado.csv.gz')
 entrenar = pd.read_csv(r'data_set_limpio/modelo.csv.gz')
-
+item_user = pd.read_csv(r'data_set_limpio\item_cantidad_usuarios.csv.gz')
 
 
 @app.get('/items_usuario/{usuario}')
 def userdata(user: str):
-    
     try:
-        for x in pd.read_csv(r'data_set_limpio/items_preparado.csv.gz', chunksize=5000):
-            if user in list(x['user_id']):
-                aux = x
+        usuario = 0
+        chunks = pd.read_csv(r'data_set_limpio\item_desplegado.csv.gz', chunksize=200000)
+        for chunk in chunks:
+            if chunk['user'].isin([user]).any():
+                usuario = chunk[chunk['user'] == user]
                 break
-            x = 0
-                
-        precios = []
-        respuesta = {}
-        
-        
-        usuario = aux.loc[aux['user_id'] == user]['items']
-        
-        
-        if not usuario.empty:
-            usuario = usuario.iloc[0]
-        data = ast.literal_eval(usuario)
-        result = pd.DataFrame(data)
 
-
-        for y in result['item_name']:
-            price = df.loc[df['app_name'] == y]['price'].values
-            if len(price) > 0:
-                try: 
-                    price_value = float(price[0])
-                    precios.append(price_value)
-                except ValueError:
-                    pass  
+        resultado = {
+            'Usuario' : user,
+            'Dinero gastado' : str(usuario['price'].sum())+'$',
+            'cantidad de items' : str(item_user.loc[item_user['user_id'] == user]['items_count'].values[0]),
+            'Porcentaje de recomendaciones' :str(round((len(opinion.loc[opinion['user'] == user])  / item_user.loc[item_user['user_id'] == user]['items_count'].values[0])*100,2))+'%'}
         
-        respuesta['Usuario'] = user
-        respuesta['Dinero gastado'] = str(round(sum(precios)))+' USD'
-        respuesta["cantidad de items"] = str(len(result))
-        
-        respuesta['Porcentaje de recomendaciones'] = str(round(((len(opinion.loc[opinion['user'] == user]) / len(result))) * 100,2))+ '%'
-        
-        return respuesta
+        return resultado
     except:
         return 'El usuario no se encuentra en la base de datos.'
 
