@@ -17,7 +17,7 @@ entrenar = pd.read_csv(r'data_set_limpio/modelo.csv.gz')
 item_user = pd.read_csv(r'data_set_limpio/item_cantidad_usuarios.csv.gz')
 
 
-@app.get('/items_usuario/{usuario}')
+@app.get('/userdata/{usuario}')
 def userdata(user: str):
     try:
         usuario = 0
@@ -97,7 +97,7 @@ def best_developer_year(year : int):
 
 
 @app.get('/Opiniones/{des}')
-def resenias_developer( des : str ):
+def review_developer( des : str ):
     
     try:
 
@@ -118,11 +118,11 @@ def resenias_developer( des : str ):
 
 
 @app.get('/Recomendaciones/{usuario}')
-def recomendaciones_usuario(usuario: str):
+def recomend_user(usuario: str):
     if usuario not in entrenar['user'].unique():
         juegos_aleatorios = list(entrenar['app_name'].sample(5))
-        mensaje = f'El usuario {usuario} no posee ningún item en su biblioteca, por lo que la recomendación será aleatoria.'
-        return {f'Usuario: {usuario}': {mensaje: juegos_aleatorios}}
+        mensaje = f'El usuario "{usuario}" no posee ningún item en su biblioteca, por lo que la recomendación será aleatoria.'
+        return {mensaje: juegos_aleatorios}
     else:
         diccionario = {}
         
