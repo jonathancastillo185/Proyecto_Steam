@@ -3,7 +3,7 @@ import pandas as pd
 import ast
 import pyarrow.parquet as pq
 import pickle
-
+import json
 
 
 app = FastAPI()
@@ -63,25 +63,33 @@ def userdata(user: str):
 
 
 @app.get('/desarrollador/{developer}')
-def developer(developer : str):
+def developer(developer: str):
     if developer not in list(df['developer']):
         return 'El desarrollador no se encuentra en la base de datos'
-    
 
     fechas = df['release_date'].unique()
-    
-    anio = {}
-    
-    free = {}
-    for x in fechas:
-        if len(df[(df['release_date'] == x) & (df['developer'] == developer)]) != 0:
-            anio[x] = len(df[(df['release_date'] == x) & (df['developer'] == developer)])
-            free[x] = len(df[(df['release_date'] == x) & (df['developer'] == developer) & (df['price'] == 0.0)])
-    for x,y  in free.items():
-        free[x] = str(round((y / anio[x])*100,2))+'%'
 
-    resultado = {'Cantidad de Items': anio,'Contenido Free':free}
-    
+    anio = {}
+    free = {}
+
+    for x in fechas:
+        filter_condition = (df['release_date'] == x) & (df['developer'] == developer)
+        developer_releases = df[filter_condition]
+
+        if len(developer_releases) != 0:
+            anio[x] = len(developer_releases)
+            free[x] = len(developer_releases[developer_releases['price'] == 0.0])
+
+    for x, y in free.items():
+        free[x] = f"{round((y / anio[x]) * 100, 2)}%"
+
+    # Convertir a tipos de datos nativos de Python
+    anio = {str(k): v for k, v in anio.items()}
+    free = {str(k): v for k, v in free.items()}
+
+    resultado = {'Cantidad de Items': anio, 'Contenido Free': free}
+
+    # Serializar a JSON usando json.dumps
     return resultado
 
 
