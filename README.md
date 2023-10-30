@@ -27,6 +27,10 @@ El sistema se construye en dos etapas principales:
 
 ## Funcionalidades Principales de la API
 
+<p align="center">
+  <img src="image (1).jpg" width="400" alt="Texto alternativo si la imagen no carga">
+</p>
+
 La API proporciona las siguientes funciones:
 
 - `userdata(User_id)` - Detalles sobre el gasto del usuario, el porcentaje de recomendaciónes que realizo en base al total de items en su biblioteca, y la cantidad de items.
