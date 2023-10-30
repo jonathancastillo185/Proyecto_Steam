@@ -1,5 +1,9 @@
 # Proyecto Individual 1 - Sistema de Recomendación de Videojuegos para Steam
 
+<p align="center">
+  <img src="descarga.png" width="400" alt="Texto alternativo si la imagen no carga">
+</p>
+
 
 En este proyecto se planto la tarea de crear un sistema de recomendacion de videojuegos para la plataforma de Steam. Este trabajo se realizo desde cero, Se logro ofrecer una solucion completa que involucra desde la ingenieria de los datos, hasta el despliegue de una API utilizando la libreria FastAPI. El objetivo de este proyecto es proporcionar a los usuarios una herramienta efectiva para descubrir nuevos juegos en base a un analisis de sentimiento, informacion de los desarrolladores, interaccion de los usuarios y un modelo de machine learning.
 
@@ -35,7 +39,13 @@ La API proporciona las siguientes funciones:
 
 ## Funcionalidad de la API con modelo de Machine Learning
 
+<p align="center">
+  <img src="image (6).jpg" width="400" alt="Texto alternativo si la imagen no carga">
+</p>
+
 - `recomend_user(usuario)` - 5 Recomendaciones para un usuario especifico, el modelo de machine learning entrenado con las bases de datos brindadas por la empresa le recomienda al usuario 5 juegos relacionados a su agrado en base a los juegos en los que dio su opinion, si el usuario no se encuentra en la base de datos o no dio valoraciones a ningun juego se le realizara una recomendacion aleatoria de juegos.
+
+<h3><center>La forma en la que se creao y se utiliza cada funcion explicado con un enfoque tecnico, se encuentra detallada en profundidad en el directorio llamado FUNCIONES.</center></h3>
 
 
 ### Uso de la API
@@ -44,3 +54,12 @@ Accede a la API desplegada en [https://proyecto-steam-jac.onrender.com/].
 
 Accede al entorno virtual de la API en [https://proyecto-steam-jac.onrender.com/docs].
 
+## Autor
+
+Nombre : Jonathan Ariel castillo
+
+GitHub : [https://github.com/jonathancastillo185]
+
+Linkedin : [https://www.linkedin.com/in/jonathan-castillo-7962b7163/]
+
+ 
