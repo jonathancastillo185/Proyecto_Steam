@@ -8,7 +8,7 @@ import json
 
 app = FastAPI()
 
-with open(r'Modelo/Machine.ipynb', 'rb') as file:
+with open(r'Modelo/modelo_entrenado.pkl', 'rb') as file:
     model = pickle.load(file)
 
 df = pd.read_csv(r'data_set_limpio/games_preparado.csv.gz')
