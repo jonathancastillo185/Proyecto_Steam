@@ -23,7 +23,7 @@ def userdata(user: str):
         if user not in item_user['user_id'].unique():
             return {f'El usuario {user}, no existe.'}
         usuario = 0
-        chunks = pd.read_csv(r'data_set_limpio/item_desplegado.csv.gz', chunksize=200000)
+        chunks = pd.read_csv(r'../data_set_limpio/item_desplegado.csv.gz', chunksize=200000)
         for chunk in chunks:
             if chunk['user'].isin([user]).any():
                 usuario = chunk[chunk['user'] == user]
@@ -62,13 +62,12 @@ def developer(developer: str):
     for x, y in free.items():
         free[x] = f"{round((y / anio[x]) * 100, 2)}%"
 
-    # Convertir a tipos de datos nativos de Python
+
     anio = {str(k): v for k, v in anio.items()}
     free = {str(k): v for k, v in free.items()}
 
     resultado = {'Cantidad de Items': anio, 'Contenido Free': free}
 
-    # Serializar a JSON usando json.dumps
     return resultado
 
 
@@ -76,7 +75,7 @@ def developer(developer: str):
 @app.get('/Top_3/{year}')
 def best_developer_year(year : int):
     
-        anio = pd.read_csv(r'data_set_limpio//Max_developer_year.csv')
+        anio = pd.read_csv(r'../data_set_limpio//Max_developer_year.csv')
 
             
         anio = anio.sort_values('Anio', ascending=False)
@@ -103,7 +102,7 @@ def review_developer( des : str ):
     
     try:
 
-        table = pq.read_table('data_set_limpio/recomends_dev.parquet')
+        table = pq.read_table(r'../data_set_limpio/recomends_dev.parquet')
         
         dev = table.to_pandas()
         

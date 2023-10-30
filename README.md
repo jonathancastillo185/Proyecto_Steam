@@ -38,11 +38,10 @@ La API proporciona las siguientes funciones:
 - `recomend_user(usuario)` - 5 Recomendaciones para un usuario especifico, el modelo de machine learning entrenado con las bases de datos brindadas por la empresa le recomienda al usuario 5 juegos relacionados a su agrado en base a los juegos en los que dio su opinion, si el usuario no se encuentra en la base de datos o no dio valoraciones a ningun juego se le realizara una recomendacion aleatoria de juegos.
 
 
+
 ### Uso de la API
 
 Accede a la API desplegada en [https://proyecto-steam-jac.onrender.com/].
 
 Accede al entorno virtual de la API en [https://proyecto-steam-jac.onrender.com/docs].
 
-
-### Uso de la API
