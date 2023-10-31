@@ -70,9 +70,11 @@ A continuación, realizaré una breve referencia al trabajo que se realizó en c
 [limpieza_games.ipynb](ETL\limpiesa_games.ipynb)
 
 `Max_developer_year.csv`: Este conjunto de datos contiene información sobre qué desarrollador lanzó la mayor cantidad de juegos cada año. Se extrajo esta información de la base de datos original, se transformó para calcular la cantidad de juegos lanzados por cada desarrollador cada año, y luego se cargó en este documento.
-[]
+[Funcion4.ipynb](Funciones\Funcion4.ipynb)
 
 `recommends_dev.parquet`: Este conjunto de datos contiene las reseñas de los juegos de cada desarrollador. Se extrajeron las reseñas de la base de datos original, se transformaron para calcular la cantidad de reseñas positivas y negativas para cada desarrollador, y luego se cargaron en este conjunto de datos.
+[Machine_learning.ipynb](Modelo\Machine_Learning.ipynb)
+
 
 En cada caso, el resultado del proceso ETL es un documento que contiene datos limpios, transformados y listos para ser analizados. Cada conjunto de datos se puede cargar en un DataFrame para realizar análisis de datos.
 
