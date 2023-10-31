@@ -1,7 +1,7 @@
 # Proyecto Individual 1 - Sistema de Recomendación de Videojuegos para Steam
 
 <p align="center">
-  <img src="descarga.png" width="400" alt="Texto alternativo si la imagen no carga">
+  <img src="images/image (2).png" width="400" alt="Texto alternativo si la imagen no carga">
 </p>
 
 
@@ -28,7 +28,7 @@ El sistema se construye en dos etapas principales:
 ## Funcionalidades Principales de la API
 
 <p align="center">
-  <img src="image (1).jpg" width="400" alt="Texto alternativo si la imagen no carga">
+  <img src='images/image (1).jpg' width="400" alt="Texto alternativo si la imagen no carga">
 </p>
 
 La API proporciona las siguientes funciones:
@@ -44,7 +44,7 @@ La API proporciona las siguientes funciones:
 ## Funcionalidad de la API con modelo de Machine Learning
 
 <p align="center">
-  <img src="image (6).jpg" width="400" alt="Texto alternativo si la imagen no carga">
+  <img src="images/image (6).jpg" width="400" alt="Texto alternativo si la imagen no carga">
 </p>
 
 - `recomend_user(usuario)` - 5 Recomendaciones para un usuario especifico, el modelo de machine learning entrenado con las bases de datos brindadas por la empresa le recomienda al usuario 5 juegos relacionados a su agrado en base a los juegos en los que dio su opinion, si el usuario no se encuentra en la base de datos o no dio valoraciones a ningun juego se le realizara una recomendacion aleatoria de juegos.
