@@ -84,6 +84,8 @@ Accede a la API desplegada en [https://proyecto-steam-jac.onrender.com/].
 
 Accede al entorno virtual de la API en [https://proyecto-steam-jac.onrender.com/docs].
 
+Link al video : [https://youtube.com/watch?v=sF55bvRaGCA]
+
 ## Autor
 
 Nombre : Jonathan Ariel castillo
