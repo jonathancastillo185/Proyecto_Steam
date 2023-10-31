@@ -53,6 +53,10 @@ La API proporciona las siguientes funciones:
 
 ## Extract, Transform and Load (ETL)
 
+<p align="center">
+  <img src="images/image (3).jpg" width="400" alt="Texto alternativo si la imagen no carga">
+</p>
+
 A continuación, realizaré una breve referencia al trabajo que se realizó en cada uno de los conjuntos de datos. El concepto general es lograr que cada ETL y sus funciones sean reutilizables a medida que la base de datos principal continúa brindándonos información. Se trabajó con ese enfoque, asegurando que cada archivo sea reutilizable y se adapte al dataset original.
 
 `games_preparado.csv.gz`: En este procedimiento, se extrajeron los datos de los juegos de la base de datos original de Steam. Los datos se limpiaron y transformaron para que solo contuvieran la información relevante para el análisis, como el título del juego, la fecha de lanzamiento, el desarrollador y el precio. [limpieza_games.ipynb](ETL\limpiesa_games.ipynb)
@@ -74,7 +78,7 @@ Un detalle importante es que cada conjunto de datos se guardó y comprimió en l
 Para los conjuntos de datos de mayor tamaño, realicé la lectura en base a chunks (o porciones). En la documentación dejé asentado en los momentos en que realicé la máxima optimización de los recursos. Estos procesos se llevaron a cabo para aprovechar al máximo los bajos recursos de la plataforma, priorizando la velocidad de respuesta al realizar cada consulta.
 
 
-### Uso de la API
+### Puesta en marcha de la api
 
 Accede a la API desplegada en [https://proyecto-steam-jac.onrender.com/].
 
