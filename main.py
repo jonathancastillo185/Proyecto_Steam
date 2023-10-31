@@ -17,35 +17,9 @@ entrenar = pd.read_csv(r'data_set_limpio/modelo.csv.gz')
 item_user = pd.read_csv(r'data_set_limpio/item_cantidad_usuarios.csv.gz')
 
 
-@app.get('/userdata/{usuario}')
-def userdata(user: str):
-    '''
-        Se le ingresa un usuario y devuelve la cantidad de dinero que gasto, cantidad de items que tiene en su biblioteca, y porcentaje de recomendaciones que realizo el usuario en base a la cantidad total de items compro
-    '''
-    try:
-        if user not in item_user['user_id'].unique():
-            return {f'El usuario {user}, no existe.'}
-        usuario = 0
-        chunks = pd.read_csv(r'data_set_limpio/item_desplegado.csv.gz', chunksize=200000)
-        for chunk in chunks:
-            if chunk['user'].isin([user]).any():
-                usuario = chunk[chunk['user'] == user]
-                break
 
-        resultado = {
-            'Usuario' : user,
-            'Dinero gastado' : str(usuario['price'].sum())+'$',
-            'cantidad de items' : str(item_user.loc[item_user['user_id'] == user]['items_count'].values[0]),
-            'Porcentaje de recomendaciones' :str(round((len(opinion.loc[opinion['user'] == user])  / item_user.loc[item_user['user_id'] == user]['items_count'].values[0])*100,2))+'%'}
-        
-        return resultado
-    except:
-        return {'El usuario no se encuentra en la base de datos.'}
-
-
-
-@app.get('/desarrollador/{developer}')
-def developer(developer: str):
+@app.get('/Games_developer/{developer}')
+def games_developer(developer: str):
     '''
         Se le ingresa un desarrollador, y devuelve la cantidad de juegos que publico por anio, mas otra columna con el porcentaje de juegos gratis.
     '''
@@ -77,11 +51,35 @@ def developer(developer: str):
     return resultado
 
 
+@app.get('/Userdata/{usuario}')
+def userdata(user: str):
+    '''
+        Se le ingresa un usuario y devuelve la cantidad de dinero que gasto, cantidad de items que tiene en su biblioteca, y porcentaje de recomendaciones que realizo el usuario en base a la cantidad total de items compro
+    '''
+    try:
+        if user not in item_user['user_id'].unique():
+            return {f'El usuario {user}, no existe.'}
+        usuario = 0
+        chunks = pd.read_csv(r'data_set_limpio/item_desplegado.csv.gz', chunksize=200000)
+        for chunk in chunks:
+            if chunk['user'].isin([user]).any():
+                usuario = chunk[chunk['user'] == user]
+                break
 
-@app.get('/Top_3/{year}')
+        resultado = {
+            'Usuario' : user,
+            'Dinero gastado' : str(usuario['price'].sum())+'$',
+            'cantidad de items' : str(item_user.loc[item_user['user_id'] == user]['items_count'].values[0]),
+            'Porcentaje de recomendaciones' :str(round((len(opinion.loc[opinion['user'] == user])  / item_user.loc[item_user['user_id'] == user]['items_count'].values[0])*100,2))+'%'}
+        
+        return resultado
+    except:
+        return {'El usuario no se encuentra en la base de datos.'}
+
+@app.get('/Best_developer_year/{year}')
 def best_developer_year(year : int):
     '''
-        
+        Se le ingresa un anio y la funcion retorna un json con el top 3 de los desarrolladores que obtuvieron mas recomendaciones positivas
     '''
     anio = pd.read_csv(r'data_set_limpio//Max_developer_year.csv')
 
@@ -105,9 +103,9 @@ def best_developer_year(year : int):
 
 
 
-@app.get('/Opiniones/{desarrollador}')
+@app.get('/Review_developer/{desarrollador}')
 def review_developer( desesarrollador : str ):
-    
+
     try:
 
         table = pq.read_table(r'data_set_limpio/recomends_dev.parquet')
@@ -126,7 +124,7 @@ def review_developer( desesarrollador : str ):
     
 
 
-@app.get('/Recomendaciones/{usuario}')
+@app.get('/Recomend_user/{usuario}')
 def recomend_user(usuario: str):
     if usuario not in entrenar['user'].unique():
         juegos_aleatorios = list(entrenar['app_name'].sample(5))
