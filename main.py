@@ -19,6 +19,9 @@ item_user = pd.read_csv(r'data_set_limpio/item_cantidad_usuarios.csv.gz')
 
 @app.get('/userdata/{usuario}')
 def userdata(user: str):
+    '''
+        Se le ingresa un usuario y devuelve la cantidad de dinero que gasto, cantidad de items que tiene en su biblioteca, y porcentaje de recomendaciones que realizo el usuario en base a la cantidad total de items compro
+    '''
     try:
         if user not in item_user['user_id'].unique():
             return {f'El usuario {user}, no existe.'}
@@ -43,6 +46,9 @@ def userdata(user: str):
 
 @app.get('/desarrollador/{developer}')
 def developer(developer: str):
+    '''
+        Se le ingresa un desarrollador, y devuelve la cantidad de juegos que publico por anio, mas otra columna con el porcentaje de juegos gratis.
+    '''
     if developer not in list(df['developer']):
         return {'El desarrollador no se encuentra en la base de datos'}
 
@@ -74,31 +80,33 @@ def developer(developer: str):
 
 @app.get('/Top_3/{year}')
 def best_developer_year(year : int):
+    '''
+        
+    '''
+    anio = pd.read_csv(r'data_set_limpio//Max_developer_year.csv')
+
+        
+    anio = anio.sort_values('Anio', ascending=False)
     
-        anio = pd.read_csv(r'data_set_limpio//Max_developer_year.csv')
+    seleccion = anio.loc[anio['Anio'] == year].copy()
+    
+    seleccion.fillna('Sin informacion',inplace=True)
+    
+    if not seleccion['Anio'].empty:
+        respuesta = {'Anio': str(seleccion['Anio'].values[0]),
+                    'Top 1': str(seleccion['Top 1'].values[0]),
+                    'Top 2': str(seleccion['Top 2'].values[0]),
+                    'Top 3': str(seleccion['Top 3'].values[0])
+                    }
+    else:
+        respuesta = {f'No ingreso un valor relevante, este es el rango disponible ({str(anio["Anio"].min())} - {str(anio["Anio"].max())})'}
 
-            
-        anio = anio.sort_values('Anio', ascending=False)
-        
-        seleccion = anio.loc[anio['Anio'] == year].copy()
-        
-        seleccion.fillna('Sin informacion',inplace=True)
-        
-        if not seleccion['Anio'].empty:
-            respuesta = {'Anio': str(seleccion['Anio'].values[0]),
-                        'Top 1': str(seleccion['Top 1'].values[0]),
-                        'Top 2': str(seleccion['Top 2'].values[0]),
-                        'Top 3': str(seleccion['Top 3'].values[0])
-                        }
-        else:
-            respuesta = {f'No ingreso un valor relevante, este es el rango disponible ({str(anio["Anio"].min())} - {str(anio["Anio"].max())})'}
-
-        return respuesta
+    return respuesta
 
 
 
-@app.get('/Opiniones/{des}')
-def review_developer( des : str ):
+@app.get('/Opiniones/{desarrollador}')
+def review_developer( desesarrollador : str ):
     
     try:
 
@@ -106,7 +114,7 @@ def review_developer( des : str ):
         
         dev = table.to_pandas()
         
-        developer = dev.loc[dev['Developers'] == des]
+        developer = dev.loc[dev['Developers'] == desesarrollador]
         
         respuesta = {'Deloper' : str(developer['Developers'].values[0]), 'Reviews positivos' : str(developer['Positivo'].values[0]),'Reviews negativos' : str(developer['Negativo'].values[0])}
         dev = 0
