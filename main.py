@@ -18,7 +18,7 @@ item_user = pd.read_csv(r'data_set_limpio/item_cantidad_usuarios.csv.gz')
 
 
 
-@app.get('/desarrollador/{developer}')
+@app.get('/Games_developer/{developer}')
 def games_developer(developer: str):
     '''
         Se le ingresa un desarrollador, y devuelve la cantidad de juegos que publico por anio, mas otra columna con el porcentaje de juegos gratis.
@@ -51,7 +51,7 @@ def games_developer(developer: str):
     return resultado
 
 
-@app.get('/userdata/{usuario}')
+@app.get('/Userdata/{usuario}')
 def userdata(user: str):
     '''
         Se le ingresa un usuario y devuelve la cantidad de dinero que gasto, cantidad de items que tiene en su biblioteca, y porcentaje de recomendaciones que realizo el usuario en base a la cantidad total de items compro
@@ -76,7 +76,7 @@ def userdata(user: str):
     except:
         return {'El usuario no se encuentra en la base de datos.'}
 
-@app.get('/Top_3/{year}')
+@app.get('/Best_developer_year/{year}')
 def best_developer_year(year : int):
     '''
         Se le ingresa un anio y la funcion retorna un json con el top 3 de los desarrolladores que obtuvieron mas recomendaciones positivas
@@ -103,7 +103,7 @@ def best_developer_year(year : int):
 
 
 
-@app.get('/Opiniones/{desarrollador}')
+@app.get('/Review_developer/{desarrollador}')
 def review_developer( desesarrollador : str ):
 
     try:
@@ -124,7 +124,7 @@ def review_developer( desesarrollador : str ):
     
 
 
-@app.get('/Recomendaciones/{usuario}')
+@app.get('/Recomend_user/{usuario}')
 def recomend_user(usuario: str):
     if usuario not in entrenar['user'].unique():
         juegos_aleatorios = list(entrenar['app_name'].sample(5))
